@@ -70,7 +70,7 @@ function loadArticles(category, containerId) {
 
         articleDiv.innerHTML = `
             <div class="image-container">
-                <img src="${validImageUrl}" class="article-image" alt="Article Image">
+                <iframe src="${validImageUrl}" class="article-image" allowfullscreen></iframe>
             </div>
             <div class="article-details">
                 <h3 class="article-category">${article.category}</h3>
