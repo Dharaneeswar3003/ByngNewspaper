@@ -65,7 +65,7 @@ function loadArticles(category, containerId) {
         const articleDiv = document.createElement('div');
         articleDiv.classList.add('article');
 
-        // Use <img> instead of <iframe> to prevent black background issues
+        // Use image URL directly from API (assuming it's already converted)
         const validImageUrl = article.image || 'default-image.jpg';
 
         articleDiv.innerHTML = `
@@ -91,45 +91,26 @@ function loadArticles(category, containerId) {
     });
 }
 
-// Optimized function to wait for articles to be available
-async function waitForArticles() {
-    return new Promise((resolve) => {
-        const checkArticles = () => {
-            if (articles.length > 0) {
-                resolve();
-            } else {
-                setTimeout(checkArticles, 50); // Check every 50ms for faster response
-            }
-        };
-        checkArticles();
-    });
-}
-
 // Function to load a single article based on URL parameter
-async function loadArticlePage() {
+function loadArticlePage() {
     const params = new URLSearchParams(window.location.search);
     const articleId = parseInt(params.get('id'));
 
-    // Wait for articles to be available
-    await waitForArticles();
+    if (!articles.length) {
+        setTimeout(loadArticlePage, 100); // Retry if data isn't loaded yet
+        return;
+    }
 
     const article = articles.find(a => a.id === articleId);
 
     if (article) {
         document.querySelector('.article-title').textContent = article.title;
-        document.querySelector('.article-writer').textContent = article.author || "N/A";
-        document.querySelector('.article-editor').textContent = `Edited by: ${article.editor || "N/A"}`;
-        document.querySelector('.article-credit').textContent = `Photo credit: ${article.photocredit || 'N/A'}`;
         
         const imageElement = document.querySelector('.article-image');
-        if (article.image) {
-            imageElement.src = article.image;
-            imageElement.style.display = "block"; // Ensure it's visible
-        } else {
-            imageElement.style.display = "none"; // Hide if no image
-        }
+        imageElement.src = article.image;  // Use direct API URL
+        imageElement.alt = article.title;
 
-        document.querySelector('.article-body').innerHTML = article.content.replace(/\n/g, "<br>");
+        document.querySelector('.article-body').innerHTML = article.content;
     } else {
         window.location.href = '../index.html';
     }
