@@ -1,3 +1,14 @@
+/*Header animation*/
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 1.0s ease;
+}
+
+header.hide-on-scroll {
+  transform: translateY(-100%);
+}
 /*home-image*/
 .homeimage-container {
   position: relative;
@@ -63,6 +74,9 @@
 .main-contact h2, .about h2, .about h6 {
 color: #BB2C2C;
 font-family: 'kepler-std', serif;
+}
+.about h6 {
+  font-size: 35px;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -164,10 +178,7 @@ margin-bottom: 10px;
 
 /* Header */
 header {
-position: sticky;
-top: 0;
 width: 100%;
-z-index: 100;
 background: #fff;
 display: flex;
 gap: 2.5px;
@@ -202,6 +213,7 @@ align-items: center;
 #mobile-menu.visible {
 display: flex;
 }
+
 #mobile-menu ul {
 list-style: none;
 margin: 0;
@@ -313,10 +325,13 @@ text-align: center;
 .team-member h2 {
 font-size: 20px;
 color: #BB2C2C;
-padding-right: 30px;
 }
 .team-member h3 {
-font-size: 25px;
+  font-size: 25px;
+  font-family: 'kepler-std', serif;
+  text-align: center;
+  color: #000;
+  margin-bottom: 5px;
 }
 .team-member img {
 display: block;
@@ -325,17 +340,14 @@ margin: 0 auto;
 
 /* Sections */
 .school-news h1, .local-news h1, .features h1,
-.allarticles h1, .contact h2, .about h3, .about h4 {
+.allarticles h1, .contact h2, .about h4 {
 font-size: 40px;
 font-family: 'kepler-std', serif;
 text-align: center;
 color: #BB2C2C;
 margin-bottom: 15px;
 }
-.about h3 {
-color: #000;
-margin-bottom: 10px;
-}
+
 .main-contact, .about, .contact {
 text-align: center;
 }
@@ -355,9 +367,7 @@ margin: 20px auto;
     background: #fff;
     width: 100%;
     margin: 0;
-    top: 0;
     left: 0;
-    z-index: 40;
   }
   .main {
     padding-top: 10px;
